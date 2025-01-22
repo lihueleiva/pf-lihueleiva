@@ -1,36 +1,41 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Student } from './models';
+
+export interface Student {
+  position: number;
+  name: string;
+  lastName: string;
+}
 
 @Component({
   selector: 'app-students',
   standalone: false,
-
   templateUrl: './students.component.html',
-  styleUrl: './students.component.scss'
+  styleUrls: ['./students.component.scss']
 })
 export class StudentsComponent {
   studentForm: FormGroup;
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-
+  displayedColumns: string[] = ['position', 'name', 'lastName'];
   students: Student[] = [];
 
   constructor(private fb: FormBuilder) {
     this.studentForm = this.fb.group({
-      name:[null, [Validators.required]],
+      name: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
     });
   }
 
   onSubmit() {
-    if (this.studentForm.invalid){
+    if (this.studentForm.invalid) {
       this.studentForm.markAllAsTouched();
-    } else{
-      console.log(this.studentForm.value);
+    } else {
+      const newStudent: Student = {
+        position: this.students.length + 1,
+        ...this.studentForm.value,
+      };
 
-      this.students.push({
-        ...this.studentForm.value
-      });
+      this.students = [...this.students, newStudent];
+      this.studentForm.reset();
     }
   }
 }
