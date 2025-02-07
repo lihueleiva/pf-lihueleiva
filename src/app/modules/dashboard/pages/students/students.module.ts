@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { SharedModule } from '../../../../shared/shared.module';
 
 @NgModule({
   declarations: [StudentsComponent],
@@ -20,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    SharedModule
   ],
   exports: [StudentsComponent]
 })

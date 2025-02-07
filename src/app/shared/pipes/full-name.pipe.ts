@@ -6,8 +6,14 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FullNamePipe implements PipeTransform {
 
-  transform(value: string, ...args: unknown[]): unknown {
-    return value.toUpperCase();
+  transform(value: string, type? : 'titlecase'): string {
+    
+
+    let result = value;
+
+  
+
+    return result;
   }
 
 }

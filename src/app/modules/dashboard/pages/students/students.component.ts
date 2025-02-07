@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export interface Student {
   position: number;
-  name: string;
+  firstName: string;
   lastName: string;
 }
 
@@ -15,13 +15,13 @@ export interface Student {
 })
 export class StudentsComponent {
   studentForm: FormGroup;
-  displayedColumns: string[] = ['position', 'name', 'lastName', 'actions'];
+  displayedColumns: string[] = ['position', 'firstName', 'lastName', 'actions'];
   students: Student[] = [];
   editingIndex: number | null = null;
 
   constructor(private fb: FormBuilder) {
     this.studentForm = this.fb.group({
-      name: [null, [Validators.required]],
+      firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
     });
   }
@@ -56,7 +56,7 @@ export class StudentsComponent {
     this.editingIndex = index;
     const student = this.students[index];
     this.studentForm.setValue({
-      name: student.name,
+      firstName: student.firstName,
       lastName: student.lastName,
     });
   }
