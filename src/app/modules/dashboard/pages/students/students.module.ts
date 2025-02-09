@@ -9,9 +9,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from '../../../../shared/shared.module';
+import { StudentsDialogFormComponent } from './components/students-dialog-form/students-dialog-form.component';
+import { StudentDetailComponent } from './pages/student-detail/student-detail.component';
 
 @NgModule({
-  declarations: [StudentsComponent],
+  declarations: [StudentsComponent, StudentsDialogFormComponent, StudentDetailComponent],
   imports: [
     CommonModule,
     StudentsRoutingModule,
