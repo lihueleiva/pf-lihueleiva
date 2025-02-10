@@ -1,18 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { authGuard } from '../../core/guards/auth.guard';
 import { adminGuard } from '../../core/guards/admin.guard';
 
-/**
- * Aqui estamos posicionados en la ruta base "/dashboard"
- */
 
 const routes: Routes = [
   {
-    /**
-     * Si mi intencion es definir la ruta "/dashboard/home"
-     */
+
     path: 'home',
     loadChildren: () =>
       import('./pages/home/home.module').then((m) => m.HomeModule),

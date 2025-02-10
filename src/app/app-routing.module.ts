@@ -19,7 +19,7 @@ const routes: Routes = [
       import('./modules/auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    /** El doble asterisco ("**") es una menera de representar "Todos los paths" */
+    
     path: '**',
     redirectTo: 'auth/login',
   },
