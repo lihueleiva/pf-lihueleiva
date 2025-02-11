@@ -8,15 +8,15 @@ import { LoginPayload } from '../../modules/auth/models';
 const FAKE_USERS_DB: User[] = [
   {
     id: generateRandomString(6),
-    email: 'admin@email.com',
-    password: '123456',
+    email: 'lihue@test.com',
+    password: '12345678',
     name: 'Administrador',
     accessToken: 'djMDFJNdfmvcJKDFdsmd23GFuedsvFGD2d32',
     role: 'ADMIN',
   },
   {
     id: generateRandomString(6),
-    email: 'employee@email.com',
+    email: 'empleado@test.com',
     password: '123456',
     name: 'Empleado',
     accessToken: 'djMDFJNd3gngh61DFd56hhgfddd23GFue232',

@@ -1,19 +1,27 @@
-<h2>Cursos</h2>
-@if (isLoading) {
-<mat-spinner />
-} @else {
+<div class="courses-container">
+  <div class="header">
+    <h2 class="title">📚 Cursos</h2>
+    <button
+      mat-flat-button
+      color="primary"
+      class="create-button"
+      [disabled]="!(isAdmin$ | async)"
+      (click)="openFormDialog()"
+    >
+      ➕ Crear curso
+    </button>
+  </div>
 
-<button
-  [disabled]="!(isAdmin$ | async)"
-  (click)="openFormDialog()"
-  mat-flat-button
->
-  Crear curso
-</button>
+  <div class="content">
+    <div class="loading-container" *ngIf="isLoading">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
 
-<app-courses-table
-  [dataSource]="dataSource"
-  (delete)="onDelete($event)"
-  (edit)="openFormDialog($event)"
-/>
-}
+    <app-courses-table
+      *ngIf="!isLoading"
+      [dataSource]="(dataSource$ | async) ?? []"
+      (delete)="onDelete($event)"
+      (edit)="openFormDialog($event)"
+    ></app-courses-table>
+  </div>
+</div>

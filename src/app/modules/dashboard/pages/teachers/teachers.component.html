@@ -1,1 +1,21 @@
-<p>teachers works!</p>
+<div class="teachers-container">
+  <div class="header">
+    <h2 class="title">👨‍🏫 Profesores</h2>
+    <button mat-flat-button color="primary" (click)="openFormDialog()">
+      ➕ Crear Profesor
+    </button>
+  </div>
+
+  <div class="content">
+    <div *ngIf="isLoading" class="loading-container">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+
+    <app-teachers-table
+      *ngIf="!isLoading"
+      [dataSource]="(dataSource$ | async) ?? []"
+      (edit)="openFormDialog($event)"
+      (delete)="onDelete($event)"
+    />
+  </div>
+</div>

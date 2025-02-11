@@ -1,0 +1,15 @@
+.full-width {
+    width: 100%;
+  }
+  
+  .dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  
+    button {
+      min-width: 100px;
+    }
+  }
+  

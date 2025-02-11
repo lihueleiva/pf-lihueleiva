@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>
+  {{ isEditMode ? "Editar Profesor" : "Agregar Profesor" }}
+</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Nombre del Profesor</mat-label>
+    <input matInput formControlName="name" />
+    <mat-error *ngIf="form.controls['name'].invalid">
+      El nombre es requerido
+    </mat-error>
+  </mat-form-field>
+
+  <div mat-dialog-actions class="dialog-actions">
+    <button mat-button (click)="dialogRef.close()">Cancelar</button>
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      {{ isEditMode ? "Actualizar" : "Guardar" }}
+    </button>
+  </div>
+</form>

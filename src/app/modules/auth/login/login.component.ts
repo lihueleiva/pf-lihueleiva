@@ -4,27 +4,25 @@ import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
-  standalone: false,
-
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  styleUrls: ['./login.component.scss'],
+  standalone: false
 })
 export class LoginComponent {
   loginForm: FormGroup;
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
   onSubmit(): void {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
-    } else {
-      // LOGIN...
-      this.authService.login(this.loginForm.value);
+      return;
     }
+    this.authService.login(this.loginForm.value);
   }
 }

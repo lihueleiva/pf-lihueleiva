@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
@@ -24,8 +23,8 @@ export class NavMenuComponent {
       routerLink: 'courses',
     },
     {
-      label: 'Usuarios',
-      routerLink: 'users',
+      label: 'Teachers',
+      routerLink: 'teachers',
     },
   ];
 

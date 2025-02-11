@@ -1,0 +1,64 @@
+$primary-color: #1e88e5;
+$accent-color: #ff9800;
+$background-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: $background-gradient;
+  padding: 1rem;
+
+  .login-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 2.5rem;
+    background: #ffffff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .mat-form-field {
+    width: 100%;
+  }
+
+  .login-button {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 8px;
+    transition: background 0.3s;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+
+  .forgot-password {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: $primary-color;
+    cursor: pointer;
+    transition: color 0.3s;
+
+    &:hover {
+      color: darken($primary-color, 15%);
+    }
+  }
+}

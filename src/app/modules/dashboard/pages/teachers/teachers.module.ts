@@ -1,11 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { TeachersRoutingModule } from './teachers-routing.module';
 import { TeachersComponent } from './teachers.component';
+import { SharedModule } from '../../../../shared/shared.module';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';  // <-- Importante
+import { TeacherFormDialogComponent } from './components/teachers-form-dialog/teachers-form-dialog.component';
+import { TeachersTableComponent } from './components/teachers-table/teachers-table.component';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { TeachersRoutingModule } from './teachers-routing.module';
 
 @NgModule({
-  declarations: [TeachersComponent],
-  imports: [CommonModule, TeachersRoutingModule],
+  declarations: [TeachersComponent, TeacherFormDialogComponent, TeachersTableComponent],
+  imports: [
+    CommonModule,
+    SharedModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatProgressBar,
+    TeachersRoutingModule
+  ],
 })
 export class TeachersModule {}

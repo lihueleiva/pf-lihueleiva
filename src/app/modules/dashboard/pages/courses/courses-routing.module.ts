@@ -4,7 +4,6 @@ import { CoursesComponent } from './courses.component';
 
 const routes: Routes = [
   {
-    /** Estamos posicionados en la ruta /courses */
     path: '',
     component: CoursesComponent,
   },
