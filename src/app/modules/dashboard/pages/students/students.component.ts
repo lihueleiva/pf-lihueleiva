@@ -1,71 +1,72 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-export interface Student {
-  position: number;
-  firstName: string;
-  lastName: string;
-}
+import { Student, StudentsService } from '../../../../core/services/students.service';
 
 @Component({
   selector: 'app-students',
-  standalone: false,
   templateUrl: './students.component.html',
-  styleUrls: ['./students.component.scss']
+  styleUrls: ['./students.component.scss'],
+  standalone: false,
 })
-export class StudentsComponent {
+export class StudentsComponent implements OnInit {
   studentForm: FormGroup;
-  displayedColumns: string[] = ['position', 'firstName', 'lastName', 'actions'];
+  displayedColumns: string[] = ['position', 'firstName', 'lastName', 'age', 'actions'];
   students: Student[] = [];
-  editingIndex: number | null = null;
+  editingStudentId: string | null = null;
+  editingIndex: any;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private studentsService: StudentsService) {
     this.studentForm = this.fb.group({
       firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
+      age: [null, [Validators.required]],
     });
   }
 
-  onSubmit() {
+  ngOnInit(): void {
+    this.loadStudents();
+  }
+
+  loadStudents(): void {
+    this.studentsService.getStudents().subscribe(data => {
+      this.students = data.map((student, index) => ({ ...student, position: index + 1 }));
+    });
+  }
+
+  onSubmit(): void {
     if (this.studentForm.invalid) {
       this.studentForm.markAllAsTouched();
+      return;
+    }
+
+    const studentData: Student = this.studentForm.value;
+
+    if (this.editingStudentId) {
+      this.studentsService.updateStudent(this.editingStudentId, studentData).subscribe(() => {
+        this.loadStudents();
+        this.editingStudentId = null;
+        this.studentForm.reset();
+      });
     } else {
-      if (this.editingIndex !== null) {
-        const updatedStudent = {
-          position: this.students[this.editingIndex].position,
-          ...this.studentForm.value,
-        };
-        this.students = [
-          ...this.students.slice(0, this.editingIndex),
-          updatedStudent,
-          ...this.students.slice(this.editingIndex + 1),
-        ];
-        this.editingIndex = null;
-      } else {
-        const newStudent: Student = {
-          position: this.students.length + 1,
-          ...this.studentForm.value,
-        };
-        this.students = [...this.students, newStudent];
-      }
-      this.studentForm.reset();
+      this.studentsService.createStudent(studentData).subscribe(() => {
+        this.loadStudents();
+        this.studentForm.reset();
+      });
     }
   }
 
-  onEdit(index: number) {
-    this.editingIndex = index;
-    const student = this.students[index];
+  onEdit(student: Student): void {
+    this.editingStudentId = student.id || null;
     this.studentForm.setValue({
       firstName: student.firstName,
       lastName: student.lastName,
+      age: student.age,
     });
   }
 
-  onDelete(index: number) {
-    this.students.splice(index, 1);
-    this.students = this.students.map((student, i) => ({
-      ...student,
-      position: i + 1,
-    }));
+  onDelete(id: string): void {
+    this.studentsService.deleteStudent(id).subscribe(() => {
+      this.loadStudents();
+    });
   }
 }

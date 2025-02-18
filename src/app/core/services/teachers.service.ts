@@ -1,64 +1,38 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { generateRandomString } from '../../shared/utils';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Teacher } from '../../modules/dashboard/pages/teachers/model/teachers.model';
 
-export interface Teacher {
-  id: string;
-  name: string;
-}
-
-const STORAGE_KEY = 'teachers';
-
-const initialTeachers: Teacher[] = [
-  { id: generateRandomString(6), name: 'Juan Pérez' },
-  { id: generateRandomString(6), name: 'María López' },
-  { id: generateRandomString(6), name: 'Carlos Ramírez' },
-];
-
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root',
+})
 export class TeacherService {
-  private teachersSubject = new BehaviorSubject<Teacher[]>(this.loadTeachers());
-  teachers$ = this.teachersSubject.asObservable();
+  private apiUrl = 'https://67b4fa83a9acbdb38ed1037a.mockapi.io/pfleiva/api/v1/teachers';
 
-  private loadTeachers(): Teacher[] {
-    const storedTeachers = localStorage.getItem(STORAGE_KEY);
-    if (storedTeachers) {
-      const parsedTeachers = JSON.parse(storedTeachers);
-      if (Array.isArray(parsedTeachers) && parsedTeachers.length > 0) {
-        return parsedTeachers;
-      }
-    }
-    
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(initialTeachers));
-    return [...initialTeachers];
-  }
+  constructor(private http: HttpClient) {}
 
-  private saveToStorage(): void {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(this.teachersSubject.value));
-  }
-
+  // Obtener todos los profesores
   getTeachers(): Observable<Teacher[]> {
-    return this.teachers$;
+    return this.http.get<Teacher[]>(this.apiUrl);
   }
 
-  addTeacher(payload: { name: string }): void {
-    const newTeacher: Teacher = { id: generateRandomString(6), ...payload };
-    const updatedTeachers = [...this.teachersSubject.value, newTeacher];
-    this.teachersSubject.next(updatedTeachers);
-    this.saveToStorage();
+  // Obtener un profesor por ID
+  getTeacherById(id: string): Observable<Teacher> {
+    return this.http.get<Teacher>(`${this.apiUrl}/${id}`);
   }
 
-  updateTeacherById(id: string, data: { name: string }): void {
-    const updatedTeachers = this.teachersSubject.value.map(teacher =>
-      teacher.id === id ? { ...teacher, ...data } : teacher
-    );
-    this.teachersSubject.next(updatedTeachers);
-    this.saveToStorage();
+  // Crear un nuevo profesor
+  createTeacher(teacher: Teacher): Observable<Teacher> {
+    return this.http.post<Teacher>(this.apiUrl, teacher);
   }
 
-  deleteTeacherById(id: string): void {
-    const filteredTeachers = this.teachersSubject.value.filter(teacher => teacher.id !== id);
-    this.teachersSubject.next(filteredTeachers);
-    this.saveToStorage();
+  // Actualizar un profesor existente
+  updateTeacher(id: string, teacher: Teacher): Observable<Teacher> {
+    return this.http.put<Teacher>(`${this.apiUrl}/${id}`, teacher);
+  }
+
+  // Eliminar un profesor por ID
+  deleteTeacherById(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

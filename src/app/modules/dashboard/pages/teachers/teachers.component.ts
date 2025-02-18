@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { ChangeDetectorRef } from '@angular/core';
-import { Teacher } from './model/teachers.model';
 import { TeacherService } from '../../../../core/services/teachers.service';
 import { TeacherFormDialogComponent } from './components/teachers-form-dialog/teachers-form-dialog.component';
+import { Teacher } from './model/teachers.model';
 
 @Component({
   selector: 'app-teachers',
@@ -22,7 +22,7 @@ export class TeachersComponent implements OnInit {
     private matDialog: MatDialog,
     private cdr: ChangeDetectorRef
   ) {
-    this.dataSource$ = this.teacherService.teachers$;
+    this.dataSource$ = this.teacherService.getTeachers();
   }
 
   ngOnInit(): void {
@@ -45,7 +45,9 @@ export class TeachersComponent implements OnInit {
 
   onDelete(id: string): void {
     if (confirm('¿Estás seguro de que quieres eliminar este profesor?')) {
-      this.teacherService.deleteTeacherById(id);
+      this.teacherService.deleteTeacherById(id).subscribe(() => {
+        this.fetchTeachers();
+      });
     }
   }
 
@@ -53,8 +55,10 @@ export class TeachersComponent implements OnInit {
     this.matDialog
       .open(TeacherFormDialogComponent, { data: { editingTeacher } })
       .afterClosed()
-      .subscribe(() => {
-        this.fetchTeachers();
+      .subscribe((result: boolean) => {
+        if (result) {
+          this.fetchTeachers();
+        }
       });
   }
 }

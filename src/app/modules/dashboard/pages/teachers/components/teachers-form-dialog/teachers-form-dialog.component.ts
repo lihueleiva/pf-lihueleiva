@@ -1,7 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Teacher, TeacherService } from '../../../../../../core/services/teachers.service';
+import { TeacherService } from '../../../../../../core/services/teachers.service';
+import { Teacher } from '../../model/teachers.model';
 
 @Component({
   selector: 'app-teachers-form-dialog',
@@ -29,11 +30,30 @@ export class TeacherFormDialogComponent {
   onSubmit(): void {
     if (this.form.valid) {
       if (this.isEditMode && this.data.editingTeacher) {
-        this.teacherService.updateTeacherById(this.data.editingTeacher.id, this.form.value);
+        this.teacherService
+          .updateTeacher(this.data.editingTeacher.id, this.form.value)
+          .subscribe({
+            next: () => {
+              this.dialogRef.close(true);
+            },
+            error: (err) => {
+              console.error('Error updating teacher:', err);
+              this.dialogRef.close(false);
+            },
+          });
       } else {
-        this.teacherService.addTeacher(this.form.value);
+        this.teacherService
+          .createTeacher(this.form.value)
+          .subscribe({
+            next: () => {
+              this.dialogRef.close(true);
+            },
+            error: (err) => {
+              console.error('Error creating teacher:', err);
+              this.dialogRef.close(false);
+            },
+          });
       }
-      this.dialogRef.close(true);
     }
   }
 }
