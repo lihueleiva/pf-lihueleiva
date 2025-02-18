@@ -13,7 +13,6 @@ export class StudentsComponent implements OnInit {
   displayedColumns: string[] = ['position', 'firstName', 'lastName', 'age', 'actions'];
   students: Student[] = [];
   editingStudentId: string | null = null;
-  editingIndex: any;
 
   constructor(private fb: FormBuilder, private studentsService: StudentsService) {
     this.studentForm = this.fb.group({
@@ -28,7 +27,7 @@ export class StudentsComponent implements OnInit {
   }
 
   loadStudents(): void {
-    this.studentsService.getStudents().subscribe(data => {
+    this.studentsService.getStudents().subscribe((data) => {
       this.students = data.map((student, index) => ({ ...student, position: index + 1 }));
     });
   }
@@ -57,7 +56,7 @@ export class StudentsComponent implements OnInit {
 
   onEdit(student: Student): void {
     this.editingStudentId = student.id || null;
-    this.studentForm.setValue({
+    this.studentForm.patchValue({
       firstName: student.firstName,
       lastName: student.lastName,
       age: student.age,
@@ -65,8 +64,10 @@ export class StudentsComponent implements OnInit {
   }
 
   onDelete(id: string): void {
-    this.studentsService.deleteStudent(id).subscribe(() => {
-      this.loadStudents();
-    });
+    if (confirm('¿Estás seguro de que quieres eliminar este estudiante?')) {
+      this.studentsService.deleteStudent(id).subscribe(() => {
+        this.loadStudents();
+      });
+    }
   }
 }

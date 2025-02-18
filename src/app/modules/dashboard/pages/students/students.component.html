@@ -30,11 +30,11 @@
 
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Acciones</th>
-      <td mat-cell *matCellDef="let element; let i = index">
-        <button mat-icon-button color="primary" (click)="onEdit(i)">
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary" (click)="onEdit(element)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="onDelete(i)">
+        <button mat-icon-button color="warn" (click)="onDelete(element.id)">
           <mat-icon>delete</mat-icon>
         </button>
       </td>
@@ -52,17 +52,31 @@
     <mat-form-field class="form-field">
       <mat-label>Nombre</mat-label>
       <input formControlName="firstName" matInput />
+      <mat-error *ngIf="studentForm.get('firstName')?.hasError('required')">
+        El nombre es obligatorio.
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="form-field">
       <mat-label>Apellido</mat-label>
       <input formControlName="lastName" matInput />
+      <mat-error *ngIf="studentForm.get('lastName')?.hasError('required')">
+        El apellido es obligatorio.
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="form-field">
       <mat-label>Edad</mat-label>
-      <input formControlName="age" matInput />
+      <input formControlName="age" matInput type="number" />
+      <mat-error *ngIf="studentForm.get('age')?.hasError('required')">
+        La edad es obligatoria.
+      </mat-error>
     </mat-form-field>
-    <button type="submit" mat-flat-button color="primary">
-      {{ editingIndex !== null ? "Actualizar" : "Guardar" }}
+    <button
+      type="submit"
+      mat-flat-button
+      color="primary"
+      [disabled]="studentForm.invalid"
+    >
+      {{ editingStudentId !== null ? "Actualizar" : "Guardar" }}
     </button>
   </form>
 </div>
