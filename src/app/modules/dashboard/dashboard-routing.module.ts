@@ -2,10 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { adminGuard } from '../../core/guards/admin.guard';
 
-
 const routes: Routes = [
   {
-
     path: 'home',
     loadChildren: () =>
       import('./pages/home/home.module').then((m) => m.HomeModule),
