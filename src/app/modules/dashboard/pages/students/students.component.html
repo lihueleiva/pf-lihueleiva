@@ -37,6 +37,13 @@
         <button mat-icon-button color="warn" (click)="onDelete(element.id)">
           <mat-icon>delete</mat-icon>
         </button>
+        <button
+          mat-icon-button
+          color="accent"
+          [routerLink]="['/dashboard/students', element.id]"
+        >
+          <mat-icon>visibility</mat-icon>
+        </button>
       </td>
     </ng-container>
 

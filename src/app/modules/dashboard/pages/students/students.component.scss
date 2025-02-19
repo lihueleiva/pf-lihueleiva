@@ -25,21 +25,13 @@ table {
   background-color: #f9f9f9;
 }
 
-// .form-container {
-//   display: flex;
-//   flex-wrap: wrap;
-//   gap: 20px;
-//   justify-content: center;
-//   align-items: center;
-// }
 .form-container {
-     display: flex;
-     flex-wrap: wrap;
-     gap: 20px;
-     justify-content: center;
-     align-items: center;
-  }
-
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
 
 .form-field {
   flex: 1 1 300px;

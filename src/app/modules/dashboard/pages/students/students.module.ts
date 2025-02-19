@@ -13,18 +13,22 @@ import { StudentsDialogFormComponent } from './components/students-dialog-form/s
 import { StudentDetailComponent } from './pages/student-detail/student-detail.component';
 
 @NgModule({
-  declarations: [StudentsComponent, StudentsDialogFormComponent, StudentDetailComponent],
+  declarations: [
+    StudentsComponent,
+    StudentsDialogFormComponent,
+    StudentDetailComponent,
+  ],
   imports: [
     CommonModule,
-    StudentsRoutingModule,
+    StudentsRoutingModule, // Importa el módulo de rutas
     ReactiveFormsModule,
     MatTableModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    SharedModule
+    SharedModule,
   ],
-  exports: [StudentsComponent]
+  exports: [StudentsComponent],
 })
 export class StudentsModule {}

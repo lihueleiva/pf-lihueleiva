@@ -3,22 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { StudentsComponent } from './students.component';
 import { StudentDetailComponent } from './pages/student-detail/student-detail.component';
 
-// La ruta base actual es "/dashboard/students"
-
 const routes: Routes = [
   {
-    path: '',
+    path: '', // Ruta base: /dashboard/students
     component: StudentsComponent,
   },
   {
-    // El path conformado es /dashboard/students/ID
-    path: ':id',
+    path: ':id', // Ruta hija: /dashboard/students/ID
     component: StudentDetailComponent,
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes)], // Usa forChild para rutas hijas
   exports: [RouterModule],
 })
 export class StudentsRoutingModule {}
