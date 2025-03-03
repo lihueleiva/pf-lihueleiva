@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { User } from '../../modules/dashboard/pages/users/models';
+import { User } from '../../modules/dashboard/pages/users/models/user.interface';
 import { generateRandomString } from '../../shared/utils';
 import { Router } from '@angular/router';
 import { LoginPayload } from '../../modules/auth/models';
