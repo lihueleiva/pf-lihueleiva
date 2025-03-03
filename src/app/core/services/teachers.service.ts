@@ -7,6 +7,9 @@ import { Teacher } from '../../modules/dashboard/pages/teachers/model/teachers.m
   providedIn: 'root',
 })
 export class TeacherService {
+  getAll() {
+      throw new Error('Method not implemented.');
+  }
   private apiUrl = 'https://67b4fa83a9acbdb38ed1037a.mockapi.io/pfleiva/api/v1/teachers';
 
   constructor(private http: HttpClient) {}

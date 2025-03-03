@@ -10,6 +10,8 @@ import { TeacherFormDialogComponent } from './components/teachers-form-dialog/te
 import { TeachersTableComponent } from './components/teachers-table/teachers-table.component';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { TeachersRoutingModule } from './teachers-routing.module';
+import { StoreModule } from '@ngrx/store';
+import { teachersReducer } from './store/teachers.reducer'; // Asegúrate de que la ruta sea correcta
 
 @NgModule({
   declarations: [TeachersComponent, TeacherFormDialogComponent, TeachersTableComponent],
@@ -21,7 +23,8 @@ import { TeachersRoutingModule } from './teachers-routing.module';
     MatInputModule,
     ReactiveFormsModule,
     MatProgressBar,
-    TeachersRoutingModule
+    TeachersRoutingModule,
+    StoreModule.forFeature('teachers', teachersReducer), // Aquí integras NgRx
   ],
 })
 export class TeachersModule {}
