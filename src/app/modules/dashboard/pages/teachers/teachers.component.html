@@ -7,12 +7,12 @@
   </div>
 
   <div class="content">
-    <div *ngIf="isLoading" class="loading-container">
+    <div *ngIf="isLoading$ | async" class="loading-container">
       <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     </div>
 
     <app-teachers-table
-      *ngIf="!isLoading"
+      *ngIf="!(isLoading$ | async)"
       [dataSource]="(dataSource$ | async) ?? []"
       (edit)="openFormDialog($event)"
       (delete)="onDelete($event)"
