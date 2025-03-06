@@ -20,7 +20,6 @@ const routes: Routes = [
   },
   {
     path: 'teachers',
-    canActivate: [adminGuard],
     loadChildren: () =>
       import('./pages/teachers/teachers.module').then((m) => m.TeachersModule),
   },

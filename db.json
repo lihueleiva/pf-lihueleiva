@@ -1,0 +1,67 @@
+{
+    "users":[
+        {
+            "id": "vnD1a",
+            "email": "lihue@test.com",
+            "password": "12345678",
+            "name": "Administrador",
+            "accessToken": "djMDFJNdfmvcJKDFdsmd23GFuedsvFGD2d32",
+            "role":" ADMIN"
+          },
+          {
+            "id": "avs4A",
+            "email": "empleado@test.com",
+            "password": "123456",
+            "name": "Empleado",
+            "accessToken": "djMDFJNd3gngh61DFd56hhgfddd23GFue232",
+            "role": "EMPLOYEE"
+          }
+    ],
+    "courses": [
+    {
+      "id": "svDFs3",
+      "name": "Javascript EDITADO"
+    },
+    {
+      "name": "Blender 3D",
+      "id": "svDFj3"
+    },
+    {
+      "id": "a9c9",
+      "name": "Unity"
+    },
+    {
+      "id": "d71d",
+      "name": "CorelDraw"
+    }
+  ],
+  "teachers": [
+    {
+      "id": "sdjv4",
+      "name": "Kakashi Sensei",
+      "courseId": "a9c9"
+    }
+  ],
+  "enrollments": [
+    {
+      "id": "adc33D",
+      "studentId": "fdvc",
+      "courseId": "svDFj3"
+    },
+    {
+      "id": "c801",
+      "studentId": "fdvc",
+      "courseId": "svDFs3"
+    },
+    {
+      "id": "86fa",
+      "studentId": "fdvv3c",
+      "courseId": "svDFj3"
+    },
+    {
+      "id": "e218",
+      "studentId": "fdvc",
+      "courseId": "svDFs3"
+    }
+  ]
+}

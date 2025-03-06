@@ -3,16 +3,16 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { concatMap } from 'rxjs/operators';
 import { Observable, EMPTY } from 'rxjs';
-import { UserActions } from './user.actions';
+import { CoursesActions } from './courses.actions';
 
 @Injectable()
-export class UserEffects {
+export class CoursesEffects {
 
 
-  loadUsers$ = createEffect(() => {
+  loadCoursess$ = createEffect(() => {
     return this.actions$.pipe(
 
-      ofType(UserActions.loadUsers),
+      ofType(CoursesActions.loadCoursess),
       /** An EMPTY observable only emits completion. Replace with your own observable API request */
       concatMap(() => EMPTY as Observable<{ type: string }>)
     );

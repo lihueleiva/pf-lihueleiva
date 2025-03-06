@@ -1,24 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { UsersService } from '../../../../core/services/users.service';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { UserActions } from './store/user.actions';
-import { selectAllUsers } from './store/user.selectors';
-import { User } from './models/user.interface';
+import { User } from './models';
+import { selectUsers } from './store/user.selectors';
 
 @Component({
   selector: 'app-users',
+  standalone: false,
+
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
-  standalone: false
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
   users$: Observable<User[]>;
 
-  constructor(private store: Store) {
-    this.users$ = this.store.select(selectAllUsers);
+  constructor(private usersService: UsersService, private store: Store) {
+    this.users$ = this.store.select(selectUsers);
+  }
+  ngOnDestroy(): void {
+    this.usersService.resetUserState();
   }
 
   ngOnInit(): void {
-    this.store.dispatch(UserActions.loadUsers());
+    this.usersService.loadUsers();
+  }
+
+  deleteUserById(id: string) {
+    this.usersService.deleteUserById(id);
   }
 }
