@@ -2,13 +2,11 @@
   <div class="header">
     <h2 class="title">📚 Cursos</h2>
     <button
-      mat-flat-button
-      color="primary"
-      class="create-button"
+      class="create-course-btn"
       [disabled]="!(isAdmin$ | async)"
       (click)="openFormDialog()"
     >
-      ➕ Crear curso
+      Crear curso +
     </button>
   </div>
 

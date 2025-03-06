@@ -1,3 +1,19 @@
+# How to run
+
+- 1. Ejecutar comando npm i para instalar dependencias
+- 2. Ejecutar comando npm i json-server -g para instalar la herramienta para crear endpoints locales
+- 3. Ejecutar comando ng s para levantar la aplicación Angular
+- 4. En la pantalla de login utilizar las siguientes credenciales:
+
+  - ADMIN:
+    - user: lihue@test.com
+    - password: 12345678
+  - EMPLOYEE:
+    - user: empleado@test.com
+    - password: 123456
+
+- Probar los diferentes roles de usuario en la vista de cursos
+
 # PfLeiva
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.4.
